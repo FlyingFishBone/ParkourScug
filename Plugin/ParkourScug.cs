@@ -1,6 +1,6 @@
 ﻿#pragma warning disable IDE1006
 
-using System; // wawawa
+using System; // wawawawawa
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -90,6 +90,7 @@ namespace ParkourScugPlugin
         }
         private void MovementTick()
         {
+            bool flag;
             /* ------------------------------ Smaller Modifiers ------------------------------ */
 
             player.initSlideCounter++;
@@ -119,7 +120,10 @@ namespace ParkourScugPlugin
             }
 
             // Wall Latch
-            if (!(input.x == 0) && player.IsTileSolid(0, input.x, 0) && player.IsTileSolid(1, input.x, 0) && wallLatchCounter < 200)
+            flag = player.animation == Player.AnimationIndex.None && player.standing && !(input.x == 0);
+            flag &= player.IsTileSolid(0, input.x, 0) && player.IsTileSolid(1, input.x, 0);
+            flag &= !(player.IsTileSolid(0, -input.x, 0) || player.IsTileSolid(1, -input.x, 0));
+            if (flag && wallLatchCounter < 200)
             {
                 playerAnimation = ParkourScugAnimationIndex.WallLatch;
                 wallLatchCounter++;
@@ -197,23 +201,26 @@ namespace ParkourScugPlugin
             }
 
             // Slide into beam momentum
-            if (player.animation == Player.AnimationIndex.ClimbOnBeam && previousAnimation != Player.AnimationIndex.ClimbOnBeam)
+            if (player.animation == Player.AnimationIndex.ClimbOnBeam && previousAnimation != Player.AnimationIndex.ClimbOnBeam && (player.canJump == 0 || !player.standing))
             {
+                player.bodyChunks[0].vel.x = 0.0f;
+                player.bodyChunks[0].vel.y += 10.0f;
+                player.bodyChunks[1].vel.x = 0.0f;
                 player.slideUpPole = (int)(-previousVelocity.y < Math.Abs(previousVelocity.x) ? Mathf.Sqrt(previousVelocity.magnitude) + 6 : 0) * 2; betterPoleSlide = true;
-                player.firstChunk.vel.x = 0.0f;
             }
 
             // Better pole climb
             if (betterPoleSlide)
             {
-                if (player.slideUpPole > 10)
+                if (player.animation == Player.AnimationIndex.GetUpToBeamTip)
+                {
+                    player.animation = Player.AnimationIndex.None;
+                    player.firstChunk.vel.y += Mathf.Sqrt(player.slideUpPole - 10) + 5;
+                    BoostEffect();
+                }
+                else if (player.slideUpPole > 10)
                 {
                     if (oddTick) player.slideUpPole += 1;
-                    if (player.animation == Player.AnimationIndex.GetUpToBeamTip && input.y == 1 && slideUpPole > 30)
-                    {
-                        player.animation = Player.AnimationIndex.None;
-                        player.firstChunk.vel.y += Mathf.Sqrt(player.slideUpPole - 10) + 5;
-                    }
                 }
                 else
                 {
