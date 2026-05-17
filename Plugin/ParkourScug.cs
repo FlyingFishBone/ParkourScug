@@ -12,12 +12,14 @@ using IL.Menu.Remix;
 using IL.MoreSlugcats;
 using ParkourScugPlugin.ParkourScug;
 using JetBrains.Annotations;
+using ParkourScugPlugin.RevenantAbilities;
 
 namespace ParkourScugPlugin
 {
     public class ParkourScugData
     {
         public Player player;
+        public MechanicalProgram program;
         private Room room => player.room;
         private Player.InputPackage input => player.input[0];
         private PlayerGraphics GetPlayerGraphics() => (player.graphicsModule as PlayerGraphics);
@@ -79,6 +81,7 @@ namespace ParkourScugPlugin
         {
             this.player = player;
             animationData = new ParkourScugAnimation(this);
+            program = new HunterProgram(player);
         }
         public virtual void ParkourScugTick(On.Player.orig_Update orig, bool eu)
         {
@@ -91,7 +94,8 @@ namespace ParkourScugPlugin
         }
         private void AbilityTick()
         {
-
+            if (program == null) return;
+            program.Update();
         }
         private void MovementTick()
         {

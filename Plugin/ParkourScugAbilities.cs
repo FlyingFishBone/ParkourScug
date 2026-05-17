@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ParkourScugPlugin.RevenantAbilities
 {
-    public class HunterAbility : MechanicalAbility
+    public class HunterProgram : MechanicalProgram
     {
         private int originalThrowingSkill;
 
@@ -24,13 +24,13 @@ namespace ParkourScugPlugin.RevenantAbilities
         }
 
 
-        public HunterAbility() : base() { }
-        public HunterAbility(Player player) : base(player) { }
-        public HunterAbility(Creature creature) : base(creature) { }
+        public HunterProgram() : base() { }
+        public HunterProgram(Player player) : base(player) { }
+        public HunterProgram(Creature creature) : base(creature) { }
     }
 
 
-    public abstract class MechanicalAbility
+    public abstract class MechanicalProgram
     {
         public bool inPlayer;
         protected bool abstracted;
@@ -57,17 +57,17 @@ namespace ParkourScugPlugin.RevenantAbilities
         }
 
 
-        public MechanicalAbility()
+        public MechanicalProgram()
         {
             inPlayer = false;
             abstracted = true;
         }
-        public MechanicalAbility(Creature creature)
+        public MechanicalProgram(Creature creature)
         {
             this.creature = creature;
             inPlayer = false;
         }
-        public MechanicalAbility(Player player)
+        public MechanicalProgram(Player player)
         {
             ConnectPlayer(player);
         }
