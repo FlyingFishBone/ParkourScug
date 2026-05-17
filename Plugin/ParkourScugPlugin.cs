@@ -5,6 +5,7 @@ using On.Watcher;
 using RWCustom;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace ParkourScugPlugin
 {
@@ -13,6 +14,7 @@ namespace ParkourScugPlugin
     public class ParkourScugPlugin : BaseUnityPlugin
     {
         public static ManualLogSource logger;
+        public static SlugBase.SlugBaseCharacter RevenantSlugBaseCharacter => SlugBase.PlayerManager.GetCustomPlayer("revenant");
 
         private bool IsParkourScug(Player player) { return player.SlugCatClass.ToString().Equals("revenant"); }
 
@@ -22,6 +24,7 @@ namespace ParkourScugPlugin
 
             On.Player.Update += PlayerUpdateTick;
             On.SlugcatHand.EngageInMovement += SlugcatHandEngageInMovement;
+            On.Player.ThrowObject += PlayerThrow;
 
             logger.LogInfo("Parkour Scug plugin loaded!");
         }
@@ -47,6 +50,16 @@ namespace ParkourScugPlugin
             }
 
             return GetParkourScugData(player).animationData.OnHandEngageInMovement(orig, hand);
+        }
+        private void PlayerThrow(On.Player.orig_ThrowObject orig, Player player, int grasp, bool eu)
+        {
+            if (!IsParkourScug(player))
+            {
+                orig(player, grasp, eu);
+                return;
+            }
+            
+            GetParkourScugData(player).ThrowObject(orig, grasp, eu);
         }
     }
 }

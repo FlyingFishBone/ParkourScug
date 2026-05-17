@@ -1,6 +1,6 @@
 ﻿#pragma warning disable IDE1006
 
-using System; // wawawawawa
+using System; // wawawawawawawawa
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +13,7 @@ using IL.MoreSlugcats;
 using ParkourScugPlugin.ParkourScug;
 using JetBrains.Annotations;
 using ParkourScugPlugin.RevenantAbilities;
+using System.Reflection;
 
 namespace ParkourScugPlugin
 {
@@ -21,6 +22,7 @@ namespace ParkourScugPlugin
         public Player player;
         public MechanicalProgram program;
         private Room room => player.room;
+        private bool HasProgram => program != null;
         private Player.InputPackage input => player.input[0];
         private PlayerGraphics GetPlayerGraphics() => (player.graphicsModule as PlayerGraphics);
 
@@ -81,10 +83,10 @@ namespace ParkourScugPlugin
         {
             this.player = player;
             animationData = new ParkourScugAnimation(this);
-            program = new HunterProgram(player);
         }
         public virtual void ParkourScugTick(On.Player.orig_Update orig, bool eu)
         {
+            if (!HasProgram) program = new HunterProgram(player);
             AnimationTick();
             AbilityTick();
             MovementTick();
@@ -94,7 +96,7 @@ namespace ParkourScugPlugin
         }
         private void AbilityTick()
         {
-            if (program == null) return;
+            if (!HasProgram) return;
             program.Update();
         }
         private void MovementTick()
@@ -307,6 +309,14 @@ namespace ParkourScugPlugin
         private void AnimationTick()
         {
             
+        }
+        public void ThrowObject(On.Player.orig_ThrowObject orig, int grasp, bool eu)
+        {
+            if (HasProgram)
+            {
+                program.ThrowObject(player.grasps[grasp]);
+            }
+            orig(player, grasp, eu);
         }
 
         private void Boost(Vector2 vel) { player.firstChunk.vel += vel; }

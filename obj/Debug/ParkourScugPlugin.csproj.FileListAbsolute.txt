@@ -1,0 +1,15 @@
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\obj\Debug\ParkourScugPlugin.csproj.AssemblyReference.cache
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\obj\Debug\ParkourScugPlugin.csproj.CoreCompileInputs.cache
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\bin\Debug\ParkourScugPlugin.dll
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\bin\Debug\ParkourScugPlugin.pdb
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\bin\Debug\Assembly-CSharp.dll
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\bin\Debug\BepInEx.dll
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\bin\Debug\HOOKS-Assembly-CSharp.dll
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\bin\Debug\SlugBase.dll
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\bin\Debug\Unity.Mathematics.dll
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\bin\Debug\UnityEngine.CoreModule.dll
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\bin\Debug\UnityEngine.dll
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\bin\Debug\UnityEngine.UI.dll
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\obj\Debug\ParkourS.6EDA7BF3.Up2Date
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\obj\Debug\ParkourScugPlugin.dll
+C:\Users\ZachT\source\repos\FlyingFishBone\ParkourScugPlugin\obj\Debug\ParkourScugPlugin.pdb

@@ -27,7 +27,7 @@
     "karma_cap": 4,
 
     "the_mark": true,
-    "the_glow": true,
+    "the_glow": false,
 
     "has_dreams": false,
     "use_default_dreams": false,
